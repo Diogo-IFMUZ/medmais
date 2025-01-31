@@ -3,154 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atendimento Médico - Aplicativo Médico</title>
+    <title>Atendimento Médico</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .card {
-            margin-bottom: 20px;
-        }
-        .specialty-card {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-    </style>
 </head>
 <body>
+    <div class="container my-5">
+        <h2>Agendamento de Consultas</h2>
+        
+        <!-- Tabela de Horários -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Hora</th>
+                    <th>Médico</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Segunda-feira</td>
+                    <td>08:00</td>
+                    <td>Dr. João</td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. João', '150', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                </tr>
+                <tr>
+                    <td>Terça-feira</td>
+                    <td>10:00</td>
+                    <td>Dr. Maria</td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. Maria', '120', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                </tr>
+                <tr>
+                    <td>Quarta-feira</td>
+                    <td>14:00</td>
+                    <td>Dr. José</td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. José', '180', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div class="container">
-    <h2 class="text-center mb-4">Atendimento Médico</h2>
-
-    <!-- Lista de Especialidades -->
-    <div class="specialty-card">
-        <h4>Especialidades Disponíveis</h4>
-
-        <!-- Especialidade 1 - Clínico Geral -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Clínico Geral</h5>
-                <p class="card-text">Encontre médicos disponíveis para atendimento em Clínica Geral.</p>
-                <a href="escolher_como_falar.html?specialty=clinico" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 2 - Pediatria -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Pediatria</h5>
-                <p class="card-text">Encontre médicos pediatras para cuidados infantis.</p>
-                <a href="escolher_como_falar.html?specialty=pediatria" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 3 - Dermatologia -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Dermatologia</h5>
-                <p class="card-text">Encontre médicos especializados em cuidados com a pele.</p>
-                <a href="escolher_como_falar.html?specialty=dermatologia" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 4 - Cardiologia -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Cardiologia</h5>
-                <p class="card-text">Encontre médicos cardiologistas para cuidados com o coração.</p>
-                <a href="escolher_como_falar.html?specialty=cardiologia" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 5 - Ginecologia -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Ginecologia</h5>
-                <p class="card-text">Encontre médicos ginecologistas para atendimento especializado.</p>
-                <a href="escolher_como_falar.html?specialty=ginecologia" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 6 - Oftalmologia -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Oftalmologia</h5>
-                <p class="card-text">Encontre médicos especializados em saúde ocular.</p>
-                <a href="escolher_como_falar.html?specialty=oftalmologia" class="btn btn-primary">Ver Médicos</a>
-            </div>
-        </div>
-
-        <!-- Especialidade 7 - Psicologia -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Psicologia</h5>
-                <p class="card-text">Encontre psicólogos disponíveis para atendimentos emocionais.</p>
-                <a href="escolher_como_falar.html?specialty=psicologia" class="btn btn-primary">Ver Psicólogos</a>
+    <!-- Modal de Detalhes do Médico -->
+    <div class="modal" tabindex="-1" id="doctorModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="doctorName"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Valor da Consulta:</strong> R$ <span id="consultationPrice"></span></p>
+                    <p><strong>Código PIX:</strong></p>
+                    <img id="pixCode" src="" alt="QR Code" class="img-fluid">
+                    <button class="btn btn-success mt-3" onclick="window.location.href='escolher_como_falar.html'">Verificar</button>
+                </div>
             </div>
         </div>
     </div>
-    <h1>Tabela de horários</h1>
-    <!-- Médicos de cada especialidade -->
-    <div id="clinico" class="specialty-card">
-        <h4>Clínico Geral - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dr. João Silva - Disponível: 10h às 12h</li>
-            <li class="list-group-item">Dra. Maria Souza - Disponível: 14h às 16h</li>
-        </ul>
-    </div>
 
-    <div id="pediatria" class="specialty-card">
-        <h4>Pediatria - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dr. Carlos Pinto - Disponível: 9h às 11h</li>
-            <li class="list-group-item">Dra. Luciana Oliveira - Disponível: 13h às 15h</li>
-        </ul>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showDoctorDetails(name, price, qrCodeUrl) {
+            // Exibe detalhes do médico no modal
+            document.getElementById('doctorName').innerText = name;
+            document.getElementById('consultationPrice').innerText = price;
+            document.getElementById('pixCode').src = qrCodeUrl;
 
-    <div id="dermatologia" class="specialty-card">
-        <h4>Dermatologia - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dr. Felipe Costa - Disponível: 11h às 13h</li>
-            <li class="list-group-item">Dra. Beatriz Lima - Disponível: 15h às 17h</li>
-        </ul>
-    </div>
-
-    <div id="cardiologia" class="specialty-card">
-        <h4>Cardiologia - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dr. Ricardo Almeida - Disponível: 8h às 10h</li>
-            <li class="list-group-item">Dra. Fernanda Silva - Disponível: 13h às 15h</li>
-        </ul>
-    </div>
-
-    <div id="ginecologia" class="specialty-card">
-        <h4>Ginecologia - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dra. Juliana Costa - Disponível: 9h às 12h</li>
-            <li class="list-group-item">Dr. Marcos Oliveira - Disponível: 14h às 16h</li>
-        </ul>
-    </div>
-
-    <div id="oftalmologia" class="specialty-card">
-        <h4>Oftalmologia - Médicos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dr. Eduardo Martins - Disponível: 10h às 12h</li>
-            <li class="list-group-item">Dra. Paula Mendes - Disponível: 13h às 15h</li>
-        </ul>
-    </div>
-
-    <div id="psicologia" class="specialty-card">
-        <h4>Psicologia - Psicólogos Disponíveis</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Dra. Ana Costa - Disponível: 9h às 11h</li>
-            <li class="list-group-item">Dr. Luiz Martins - Disponível: 14h às 16h</li>
-        </ul>
-    </div>
-
-</div>
-
+            // Exibe o modal
+            var myModal = new bootstrap.Modal(document.getElementById('doctorModal'));
+            myModal.show();
+        }
+    </script>
 </body>
 </html>
