@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeo com Médico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .video-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container video-container">
+    <h2 class="text-center mb-4">Vídeo com Médico</h2>
+
+    <!-- Tela para mostrar o vídeo do paciente -->
+    <video id="localVideo" autoplay muted></video>
+
+    <!-- Tela para mostrar o vídeo do médico -->
+    <video id="remoteVideo" autoplay></video>
+
+    <!-- Botões para iniciar e finalizar chamada -->
+    <div class="controls">
+        <button id="startButton" class="btn btn-primary" onclick="startCall()">Iniciar Chamada</button>
+       <!--<button id="endButton" class="btn btn-danger" onclick="endCall()" disabled>Finalizar Chamada</button>-->
+    </div>
+</div>
+
+<script>
+    let localStream;
+    let remoteStream;
+    let peerConnection;
+    const servers = {
+        iceServers: [
+            { urls: "stun:stun.l.google.com:19302" }
+        ]
+    };
+
+    // Função para iniciar a chamada
+    function startCall() {
+        // Configuração do MediaStream para capturar o vídeo do usuário
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                localStream = stream;
+                document.getElementById('localVideo').srcObject = localStream;
+
+                // Criar a conexão com o peer (médico)
+                peerConnection = new RTCPeerConnection(servers);
+                
+                // Adiciona o stream local à conexão
+                localStream.getTracks().forEach(track => {
+                    peerConnection.addTrack(track, localStream);
+                });
+
+                // Configura evento para receber o stream do médico
+                peerConnection.ontrack = event => {
+                    remoteStream = event.streams[0];
+                    document.getElementById('remoteVideo').srcObject = remoteStream;
+                };
+
+                // Configura o processo de sinalização (exemplo simples)
+                peerConnection.createOffer()
+                    .then(offer => peerConnection.setLocalDescription(offer))
+                    .then(() => {
+                        // Aqui seria o lugar onde você enviaria a oferta para o servidor (sinalização)
+                        // Exemplo: enviar para o médico (via WebSocket, Firebase, etc.)
+                        console.log('Oferta enviada');
+                    });
+
+                // Habilita o botão de "Finalizar Chamada"
+                document.getElementById('endButton').disabled = false;
+            })
+            .catch(error => console.error('Erro ao acessar mídia: ', error));
+    }
+
+    // Função para finalizar a chamada
+    function endCall() {
+        peerConnection.close();
+        localStream.getTracks().forEach(track => track.stop());
+        document.getElementById('localVideo').srcObject = null;
+        document.getElementById('remoteVideo').srcObject = null;
+
+        // Desabilitar botão de "Finalizar Chamada"
+        document.getElementById('endButton').disabled = true;
+    }
+</script>
+
+</body>
+</html>
