@@ -3,12 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Med +</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 24px;
+            color: #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-label {
+            font-size: 16px;
+            color: #333;
+        }
+        input[type="text"], input[type="password"] {
+            font-size: 16px;
+            padding: 12px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="text-center">Login</h2>
+    <div class="container">
+        <h2 class="text-center">Login - Med +</h2>
         <form>
             <div class="mb-3">
                 <label class="form-label">CPF</label>
@@ -16,7 +50,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Senha</label>
-                <input type="password" class="form-control" required>
+                <input type="password" class="form-control" required placeholder="Digite sua senha">
             </div>
             <a href="informacoes_preventivas.html" class="btn btn-primary w-100">Entrar</a>
         </form>
