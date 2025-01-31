@@ -25,19 +25,19 @@
                     <td>Segunda-feira</td>
                     <td>08:00</td>
                     <td>Dr. João</td>
-                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. João|Clinico Geral', '50', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. João', '50', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
                 </tr>
                 <tr>
                     <td>Terça-feira</td>
                     <td>10:00</td>
                     <td>Dr. Maria</td>
-                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. Maria|Psicóloga', '80', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. Maria', '80', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
                 </tr>
                 <tr>
                     <td>Quarta-feira</td>
                     <td>14:00</td>
                     <td>Dr. José</td>
-                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. José|Nutricionista', '100', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
+                    <td><button class="btn btn-primary" onclick="showDoctorDetails('Dr. José', '100', 'https://www.qr-code-generator.com/wp-content/themes/qr/new_structure2/img/homepage/qr-placeholder.svg')">Ver Médico</button></td>
                 </tr>
             </tbody>
         </table>
@@ -54,7 +54,7 @@
                 <div class="modal-body">
                     <p><strong>Valor da Consulta:</strong> R$ <span id="consultationPrice"></span></p>
                     <p><strong>Código PIX: medmaisfinanceiro@gmail.com</strong></p>
-                  
+                    <p><img id="pixCode" src="" alt="QR Code" class="img-fluid"></p>
                     <button class="btn btn-success mt-3" onclick="window.location.href='escolher_como_falar.html'">Verificar</button>
                 </div>
             </div>
